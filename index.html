@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistem Manajemen Perpustakaan Berbasis RFID</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Poppins -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS stylesheet -->
+    <link rel="stylesheet" href="style.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Poppins', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: '#1e40af',
+                        secondary: '#3b82f6',
+                        accent: '#f59e0b',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans antialiased">
+
+    <!-- Header / Navbar -->
+    <header class="bg-white/90 backdrop-blur-md sticky top-0 z-50 border-b border-slate-200 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <div class="flex items-center space-x-3">
+                    <div class="bg-primary text-white p-2.5 rounded-xl shadow-md">
+                        <i class="fa-solid fa-id-card-clip text-xl"></i>
+                    </div>
+                    <div>
+                        <span class="font-bold text-lg text-slate-900 tracking-tight">RFID-Lib System</span>
+                        <p class="text-xs text-slate-500">Smart Library Tracking</p>
+                    </div>
+                </div>
+                <!-- Desktop Nav -->
+                <nav class="hidden md:flex space-x-8 text-sm font-medium">
+                    <a href="#beranda" class="text-primary hover:text-secondary transition">Beranda</a>
+                    <a href="#arsitektur" class="text-slate-600 hover:text-primary transition">Arsitektur & Alat</a>
+                    <a href="#fitur" class="text-slate-600 hover:text-primary transition">Fitur Utama</a>
+                    <a href="#simulator" class="text-slate-600 hover:text-primary transition">Live Simulator</a>
+                    <a href="#keunggulan" class="text-slate-600 hover:text-primary transition">Keunggulan</a>
+                </nav>
+                <div class="hidden md:flex items-center space-x-3">
+                    <a href="#simulator" class="bg-primary hover:bg-blue-700 text-white text-sm font-medium px-4 py-2 rounded-xl shadow transition">Coba Simulator</a>
+                </div>
+                <!-- Mobile menu button -->
+                <button id="menu-btn" class="md:hidden text-slate-700 focus:outline-none text-xl p-2">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+            </div>
+        </div>
+        <!-- Mobile menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-b border-slate-200 px-4 pt-2 pb-4 space-y-2">
+            <a href="#beranda" class="block py-2 text-primary font-medium">Beranda</a>
+            <a href="#arsitektur" class="block py-2 text-slate-600">Arsitektur & Alat</a>
+            <a href="#fitur" class="block py-2 text-slate-600">Fitur Utama</a>
+            <a href="#simulator" class="block py-2 text-slate-600">Live Simulator</a>
+            <a href="#keunggulan" class="block py-2 text-slate-600">Keunggulan</a>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="beranda" class="relative overflow-hidden pt-12 pb-20 lg:pt-20 lg:pb-28 bg-gradient-to-br from-blue-900 via-primary to-blue-700 text-white">
+        <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:16px_16px]"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div class="space-y-6 text-center lg:text-left">
+                    <span class="inline-flex items-center gap-2 bg-blue-800/80 border border-blue-500/30 text-blue-200 text-xs font-semibold px-3 py-1.5 rounded-full uppercase tracking-wider shadow-inner">
+                        <i class="fa-solid fa-microchip"></i> Teknologi RFID & IoT
+                    </span>
+                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight leading-tight">
+                        Rancang Bangun Sistem Manajemen Perpustakaan Berbasis <span class="text-accent">RFID</span>
+                    </h1>
+                    <p class="text-blue-100 text-base sm:text-lg max-w-xl mx-auto lg:mx-0">
+                        Solusi modern otomatisasi sirkulasi, inventarisasi instan, dan pelacakan buku real-time menggunakan teknologi Radio Frequency Identification guna meningkatkan efisiensi operasional perpustakaan.
+                    </p>
+                    <div class="flex flex-col sm:flex-row justify-center lg:justify-start gap-4 pt-2">
+                        <a href="#simulator" class="bg-accent hover:bg-amber-600 text-slate-950 font-bold px-6 py-3.5 rounded-xl shadow-lg transition text-center flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-play"></i> Coba Simulator RFID
+                        </a>
+                        <a href="#arsitektur" class="bg-white/10 hover:bg-white/20 border border-white/30 text-white font-medium px-6 py-3.5 rounded-xl transition text-center flex items-center justify-center gap-2 backdrop-blur-sm">
+                            <i class="fa-solid fa-diagram-project"></i> Pelajari Cara Kerja
+                        </a>
+                    </div>
+                </div>
+                <!-- Hero Graphic / Illustration Card -->
+                <div class="relative flex justify-center">
+                    <div class="w-full max-w-md bg-white/10 backdrop-blur-md border border-white/20 p-6 rounded-3xl shadow-2xl space-y-6">
+                        <div class="flex items-center justify-between border-b border-white/10 pb-4">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-3 h-3 bg-red-500 rounded-full"></div>
+                                <div class="w-3 h-3 bg-yellow-500 rounded-full"></div>
+                                <div class="w-3 h-3 bg-green-500 rounded-full"></div>
+                            </div>
+                            <span class="text-xs text-blue-200 font-mono">RFID_GATE_CONTROLLER_v2.1</span>
+                        </div>
+                        <div class="space-y-4 font-mono text-sm">
+                            <div class="bg-black/30 p-3 rounded-xl border border-white/10 flex items-center justify-between">
+                                <span class="text-blue-300">UID Tag: <span class="text-white">A4-89-2B-10</span></span>
+                                <span class="bg-green-500/20 text-green-300 text-xs px-2 py-0.5 rounded">Terbaca</span>
+                            </div>
+                            <div class="bg-black/30 p-3 rounded-xl border border-white/10">
+                                <p class="text-xs text-slate-400">Judul Buku:</p>
+                                <p class="text-white font-semibold">Algoritma & Pemrograman Lanjut</p>
+                            </div>
+                            <div class="grid grid-cols-2 gap-3 text-xs">
+                                <div class="bg-black/30 p-2.5 rounded-lg border border-white/10">
+                                    <span class="text-slate-400 block">Status:</span>
+                                    <span class="text-accent font-bold">Dipinjam / Keluar</span>
+                                </div>
+                                <div class="bg-black/30 p-2.5 rounded-lg border border-white/10">
+                                    <span class="text-slate-400 block">Sinyal Reader:</span>
+                                    <span class="text-green-400 font-bold">-45 dBm (Optimal)</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="text-center pt-2">
+                            <div class="inline-flex items-center gap-2 text-xs text-blue-200 bg-blue-900/50 px-3 py-1.5 rounded-lg border border-blue-500/20">
+                                <i class="fa-solid fa-wifi animate-pulse text-green-400"></i> Pembacaan Multi-Tag Aktif (Antenna 13.56 MHz)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Statistik Singkat -->
+    <section class="bg-white border-b border-slate-200 py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+                <div class="p-4">
+                    <div class="text-3xl font-bold text-primary">99.8%</div>
+                    <div class="text-slate-500 text-sm mt-1">Akurasi Deteksi</div>
+                </div>
+                <div class="p-4">
+                    <div class="text-3xl font-bold text-primary">5x Lebih Cepat</div>
+                    <div class="text-slate-500 text-sm mt-1">Proses Peminjaman</div>
+                </div>
+                <div class="p-4">
+                    <div class="text-3xl font-bold text-primary">5+ Tag</div>
+                    <div class="text-slate-500 text-sm mt-1">Scan Sekaligus</div>
+                </div>
+                <div class="p-4">
+                    <div class="text-3xl font-bold text-primary">Real-Time</div>
+                    <div class="text-slate-500 text-sm mt-1">Pelacakan & Inventaris</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Arsitektur & Perangkat Keras -->
+    <section id="arsitektur" class="py-16 sm:py-24 bg-slate-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto space-y-4 mb-16">
+                <h2 class="text-xs uppercase tracking-widest text-primary font-bold">Arsitektur Sistem</h2>
+                <h3 class="text-3xl font-bold text-slate-900">Komponen Hardware & Software</h3>
+                <p class="text-slate-600">Sistem ini menggabungkan perangkat keras mikrokontroler dengan database terpusat berbasis web untuk manajemen perpustakaan yang cerdas.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Card 1 -->
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-200 card-hover flex flex-col justify-between">
+                    <div>
+                        <div class="w-14 h-14 bg-blue-50 text-primary rounded-xl flex items-center justify-center text-2xl mb-6">
+                            <i class="fa-solid fa-tag"></i>
+                        </div>
+                        <h4 class="text-xl font-bold text-slate-900 mb-3">RFID Tag & Sticker</h4>
+                        <p class="text-slate-600 text-sm leading-relaxed">
+                            Pasif RFID Tag (frekuensi 13.56 MHz atau UHF 860-960 MHz) ditempelkan pada setiap sampul buku. Berisi nomor unik (UID) yang merepresentasikan data buku secara spesifik.
+                        </p>
+                    </div>
+                    <div class="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
+                        <span>Frekuensi: 13.56 MHz</span>
+                        <span class="font-semibold text-primary">NFC / HF</span>
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-200 card-hover flex flex-col justify-between">
+                    <div>
+                        <div class="w-14 h-14 bg-blue-50 text-primary rounded-xl flex items-center justify-center text-2xl mb-6">
+                            <i class="fa-solid fa-tower-broadcast"></i>
+                        </div>
+                        <h4 class="text-xl font-bold text-slate-900 mb-3">RFID Reader & ESP32</h4>
+                        <p class="text-slate-600 text-sm leading-relaxed">
+                            Modul pembaca (seperti RC522 atau MFRC522) dihubungkan ke mikrokontroler ESP32/Arduino dengan modul Wi-Fi untuk mengirimkan UID hasil pembacaan ke server secara instan via protokol HTTP/MQTT.
+                        </p>
+                    </div>
+                    <div class="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
+                        <span>Mikrokontroler: ESP32</span>
+                        <span class="font-semibold text-primary">IoT Gateway</span>
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-200 card-hover flex flex-col justify-between">
+                    <div>
+                        <div class="w-14 h-14 bg-blue-50 text-primary rounded-xl flex items-center justify-center text-2xl mb-6">
+                            <i class="fa-solid fa-server"></i>
+                        </div>
+                        <h4 class="text-xl font-bold text-slate-900 mb-3">Web Server & Database</h4>
+                        <p class="text-slate-600 text-sm leading-relaxed">
+                            Sistem backend memproses data UID masuk, mencocokkan dengan tabel basis data buku & peminjam, serta menyediakan dasbor admin untuk pelacakan dan laporan sirkulasi.
+                        </p>
+                    </div>
+                    <div class="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
+                        <span>Stack: PHP / Node.js & MySQL</span>
+                        <span class="font-semibold text-primary">Cloud / Local</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Fitur Utama -->
+    <section id="fitur" class="py-16 sm:py-24 bg-white border-y border-slate-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto space-y-4 mb-16">
+                <h2 class="text-xs uppercase tracking-widest text-primary font-bold">Kapabilitas Sistem</h2>
+                <h3 class="text-3xl font-bold text-slate-900">Fitur Unggulan Manajemen Perpustakaan</h3>
+                <p class="text-slate-600">Dirancang untuk menggantikan sistem barcode konvensional yang memerlukan pemindaian satu per satu secara manual.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="bg-slate-50 p-6 rounded-2xl border border-slate-100 space-y-4">
+                    <div class="w-12 h-12 bg-primary/10 text-primary rounded-lg flex items-center justify-center text-xl">
+                        <i class="fa-solid fa-right-left"></i>
+                    </div>
+                    <h4 class="text-lg font-bold text-slate-900">Sirkulasi Otomatis</h4>
+                    <p class="text-slate-600 text-sm">Peminjaman dan pengembalian buku dapat dilakukan sekaligus dalam hitungan detik tanpa membuka buku satu per satu di hadapan petugas.</p>
+                </div>
+
+                <div class="bg-slate-50 p-6 rounded-2xl border border-slate-100 space-y-4">
+                    <div class="w-12 h-12 bg-primary/10 text-primary rounded-lg flex items-center justify-center text-xl">
+                        <i class="fa-solid fa-location-crosshairs"></i>
+                    </div>
+                    <h4 class="text-lg font-bold text-slate-900">Pelacakan & Inventaris</h4>
+                    <p class="text-slate-600 text-sm">Proses stock opname (audit koleksi buku) menjadi sangat cepat menggunakan RFID handheld scanner penelusur rak.</p>
+                </div>
+
+                <div class="bg-slate-50 p-6 rounded-2xl border border-slate-100 space-y-4">
+                    <div class="w-12 h-12 bg-primary/10 text-primary rounded-lg flex items-center justify-center text-xl">
+                        <i class="fa-solid fa-shield-halved"></i>
+                    </div>
+                    <h4 class="text-lg font-bold text-slate-900">Security Gate Alarm</h4>
+                    <p class="text-slate-600 text-sm">Gerbang sensor di pintu keluar perpustakaan akan membunyikan alarm jika ada buku yang dibawa keluar tanpa melalui prosedur peminjaman resmi.</p>
+                </div>
+
+                <div class="bg-slate-50 p-6 rounded-2xl border border-slate-100 space-y-4">
+                    <div class="w-12 h-12 bg-primary/10 text-primary rounded-lg flex items-center justify-center text-xl">
+                        <i class="fa-solid fa-chart-line"></i>
+                    </div>
+                    <h4 class="text-lg font-bold text-slate-900">Laporan & Analitik</h4>
+                    <p class="text-slate-600 text-sm">Dasbor komprehensif menampilkan statistik peminjaman buku terpopuler, denda keterlambatan, dan status ketersediaan stok.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive Simulator Section -->
+    <section id="simulator" class="py-16 sm:py-24 bg-slate-900 text-white relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center max-w-3xl mx-auto space-y-4 mb-12">
+                <span class="bg-primary/30 text-blue-300 text-xs font-semibold px-3 py-1 rounded-full border border-blue-500/30 uppercase tracking-widest">
+                    <i class="fa-solid fa-laptop-code"></i> Simulasi Interaktif
+                </span>
+                <h3 class="text-3xl font-bold">Uji Coba Sistem Scan RFID Buku</h3>
+                <p class="text-slate-400">Simulasikan bagaimana Reader RFID mendeteksi kartu/tag buku dan memperbarui status sirkulasi secara langsung.</p>
+            </div>
+
+            <!-- Simulator Box -->
+            <div class="max-w-4xl mx-auto bg-slate-800 border border-slate-700 rounded-3xl p-6 sm:p-8 shadow-2xl">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                    <!-- Pilih Buku Simulasi -->
+                    <div class="md:col-span-1 space-y-4">
+                        <label class="block text-sm font-semibold text-slate-300">Pilih Sampel Buku / Tag RFID:</label>
+                        <div class="space-y-2">
+                            <button onclick="selectBook('B001', 'Pemrograman Web Modern', 'UID: A4-89-2B-10', 'Rak A-1')" class="w-full text-left bg-slate-700/60 hover:bg-slate-700 p-3 rounded-xl border border-slate-600 transition flex items-center justify-between group">
+                                <div>
+                                    <p class="text-xs text-blue-400 font-mono">UID: A4-89-2B-10</p>
+                                    <p class="text-sm font-medium text-white truncate w-44">Pemrograman Web Modern</p>
+                                </div>
+                                <i class="fa-solid fa-chevron-right text-xs text-slate-400 group-hover:translate-x-1 transition"></i>
+                            </button>
+
+                            <button onclick="selectBook('B002', 'Kecerdasan Buatan & Machine Learning', 'UID: C7-12-9A-55', 'Rak B-3')" class="w-full text-left bg-slate-700/60 hover:bg-slate-700 p-3 rounded-xl border border-slate-600 transition flex items-center justify-between group">
+                                <div>
+                                    <p class="text-xs text-blue-400 font-mono">UID: C7-12-9A-55</p>
+                                    <p class="text-sm font-medium text-white truncate w-44">Kecerdasan Buatan & ML</p>
+                                </div>
+                                <i class="fa-solid fa-chevron-right text-xs text-slate-400 group-hover:translate-x-1 transition"></i>
+                            </button>
+
+                            <button onclick="selectBook('B003', 'Jaringan Komputer Berbasis IoT', 'UID: F9-33-8E-71', 'Rak C-2')" class="w-full text-left bg-slate-700/60 hover:bg-slate-700 p-3 rounded-xl border border-slate-600 transition flex items-center justify-between group">
+                                <div>
+                                    <p class="text-xs text-blue-400 font-mono">UID: F9-33-8E-71</p>
+                                    <p class="text-sm font-medium text-white truncate w-44">Jaringan Komputer IoT</p>
+                                </div>
+                                <i class="fa-solid fa-chevron-right text-xs text-slate-400 group-hover:translate-x-1 transition"></i>
+                            </button>
+                        </div>
+                        <div class="pt-2">
+                            <button onclick="simulateScan()" class="w-full bg-primary hover:bg-blue-600 text-white font-semibold py-3 rounded-xl shadow transition flex items-center justify-center gap-2">
+                                <i class="fa-solid fa-wifi"></i> Tap ke Reader RFID
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Panel Output / Hasil Scan -->
+                    <div class="md:col-span-2 bg-slate-900/80 rounded-2xl p-6 border border-slate-700 flex flex-col justify-between">
+                        <div class="space-y-4">
+                            <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+                                <span class="text-xs font-mono uppercase tracking-wider text-slate-400">Log Monitor Perangkat Reader</span>
+                                <span id="status-badge" class="bg-slate-700 text-slate-300 text-xs px-2.5 py-1 rounded-full">Menunggu Scan...</span>
+                            </div>
+
+                            <div id="scanner-result" class="space-y-3 py-2">
+                                <div class="text-slate-500 text-sm italic text-center py-8">
+                                    Silakan pilih salah satu buku di sebelah kiri lalu klik tombol <span class="text-blue-400 font-semibold">"Tap ke Reader RFID"</span>.
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Simulasi Aksi Sirkulasi -->
+                        <div id="action-buttons" class="hidden pt-4 border-t border-slate-800 flex gap-3">
+                            <button onclick="processCirculation('pinjam')" class="flex-1 bg-emerald-600 hover:bg-emerald-500 text-white font-medium py-2.5 px-4 rounded-xl text-sm transition flex items-center justify-center gap-2">
+                                <i class="fa-solid fa-arrow-right-to-bracket"></i> Proses Peminjaman
+                            </button>
+                            <button onclick="processCirculation('kembali')" class="flex-1 bg-amber-600 hover:bg-amber-500 text-white font-medium py-2.5 px-4 rounded-xl text-sm transition flex items-center justify-center gap-2">
+                                <i class="fa-solid fa-arrow-rotate-left"></i> Proses Pengembalian
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Log Riwayat Transaksi -->
+                <div class="border-t border-slate-700 pt-6">
+                    <h4 class="text-sm font-semibold text-slate-300 mb-3 flex items-center gap-2">
+                        <i class="fa-solid fa-clock-rotate-left"></i> Riwayat Pembacaan & Sirkulasi Real-Time
+                    </h4>
+                    <div class="bg-slate-900 rounded-xl p-4 border border-slate-700 overflow-x-auto max-h-48 overflow-y-auto">
+                        <table class="w-full text-left text-xs text-slate-300 font-mono">
+                            <thead>
+                                <tr class="text-slate-500 border-b border-slate-800 pb-2">
+                                    <th class="pb-2">Waktu</th>
+                                    <th class="pb-2">UID Tag</th>
+                                    <th class="pb-2">Judul Buku</th>
+                                    <th class="pb-2">Aksi / Status</th>
+                                </tr>
+                            </thead>
+                            <tbody id="log-table-body">
+                                <tr>
+                                    <td colspan="4" class="text-slate-500 text-center py-3 italic">Belum ada aktivitas sirkulasi sesi ini.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Keunggulan Sistem -->
+    <section id="keunggulan" class="py-16 sm:py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div class="space-y-6">
+                    <span class="text-xs uppercase tracking-widest text-primary font-bold">Mengapa RFID?</span>
+                    <h3 class="text-3xl font-bold text-slate-900 tracking-tight">Transformasi Perpustakaan Konvensional Menjadi Smart Library</h3>
+                    <p class="text-slate-600 leading-relaxed">
+                        Dibandingkan dengan barcode tradisional yang memerlukan garis pandang langsung (<span class="italic">line-of-sight</span>) dan hanya dapat dibaca satu per satu, sistem RFID menawarkan keunggulan mutlak dalam kecepatan dan otomatisasi.
+                    </p>
+                    <div class="space-y-4">
+                        <div class="flex items-start gap-4">
+                            <div class="w-8 h-8 bg-blue-100 text-primary rounded-lg flex items-center justify-center shrink-0 mt-1">
+                                <i class="fa-solid fa-check text-sm"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-slate-900">Tanpa Kontak & Garis Pandang Langsung</h4>
+                                <p class="text-slate-600 text-sm">Tag dapat terbaca meskipun tertumpuk atau berada di dalam sampul buku.</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-4">
+                            <div class="w-8 h-8 bg-blue-100 text-primary rounded-lg flex items-center justify-center shrink-0 mt-1">
+                                <i class="fa-solid fa-check text-sm"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-slate-900">Inventaris Cepat (Stock Opname)</h4>
+                                <p class="text-slate-600 text-sm">Petugas dapat memindai satu rak buku penuh hanya dalam beberapa detik berjalan.</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-4">
+                            <div class="w-8 h-8 bg-blue-100 text-primary rounded-lg flex items-center justify-center shrink-0 mt-1">
+                                <i class="fa-solid fa-check text-sm"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-slate-900">Integrasi Keamanan Maksimal</h4>
+                                <p class="text-slate-600 text-sm">Mencegah buku hilang dengan deteksi gerbang otomatis (EAS - Electronic Article Surveillance).</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Callout Box -->
+                <div class="bg-gradient-to-br from-blue-900 to-primary p-8 sm:p-10 rounded-3xl text-white shadow-xl space-y-6 relative overflow-hidden">
+                    <div class="absolute -right-10 -bottom-10 opacity-10 text-9xl">
+                        <i class="fa-solid fa-book-bookmark"></i>
+                    </div>
+                    <h4 class="text-2xl font-bold">Siap Mengimplementasikan Sistem Ini di Institusi Anda?</h4>
+                    <p class="text-blue-100 text-sm leading-relaxed">
+                        Rancang bangun sistem ini dapat disesuaikan untuk universitas, sekolah menengah, maupun perpustakaan daerah dengan skalabilitas tinggi dan biaya perawatan yang efisien.
+                    </p>
+                    <div class="pt-2">
+                        <a href="#simulator" class="inline-flex items-center gap-2 bg-accent hover:bg-amber-600 text-slate-950 font-bold px-6 py-3 rounded-xl shadow transition">
+                            <i class="fa-solid fa-envelope"></i> Hubungi Tim Pengembang
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 text-slate-400 py-12 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-6">
+                <div class="flex items-center space-x-3">
+                    <div class="bg-primary text-white p-2 rounded-lg">
+                        <i class="fa-solid fa-id-card-clip"></i>
+                    </div>
+                    <span class="font-bold text-white text-lg">RFID-Lib System</span>
+                </div>
+                <p class="text-sm text-center md:text-left">
+                    &copy; 2026 Rancang Bangun Sistem Manajemen Perpustakaan Berbasis RFID. All rights reserved.
+                </p>
+                <div class="flex space-x-4 text-lg">
+                    <a href="#" class="hover:text-white transition"><i class="fa-brands fa-github"></i></a>
+                    <a href="#" class="hover:text-white transition"><i class="fa-brands fa-linkedin"></i></a>
+                    <a href="#" class="hover:text-white transition"><i class="fa-solid fa-globe"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript Link -->
+    <script src="script.js"></script>
+</body>
+</html>
